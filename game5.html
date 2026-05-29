@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game 5: Pertanyaan Jujur 💖</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow: hidden; /* Mencegah scrollbar muncul saat tombol kabur */
+        }
+
+        /* Area box utama pertanyaan */
+        .question-box {
+            background: white;
+            border: 3px dashed #ff477e;
+            border-radius: 25px;
+            padding: 30px 20px;
+            max-width: 380px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 15px 30px rgba(255, 71, 126, 0.1);
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        /* Container khusus untuk tombol pilihan */
+        .btn-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-top: 25px;
+            min-height: 60px;
+            position: relative;
+        }
+
+        /* Tombol Sayang (Tombol Utama) */
+        .btn-yes {
+            background: #ff477e;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 15px;
+            cursor: pointer;
+            font-family: 'Fredoka', sans-serif;
+            transition: transform 0.2s;
+            box-shadow: 0 5px 10px rgba(255, 71, 126, 0.3);
+        }
+
+        .btn-yes:hover {
+            transform: scale(1.1);
+        }
+
+        /* Tombol Gak yang bakal kabur-kaburan */
+        .btn-no {
+            background: #e0e0e0;
+            color: #757575;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 15px;
+            cursor: pointer;
+            font-family: 'Fredoka', sans-serif;
+            position: absolute; /* Penting untuk manipulasi posisi koordinat */
+            transition: all 0.1s ease;
+        }
+
+        /* Overlay Pop-Up */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 240, 243, 0.85);
+            display: none;
+            justify-content: center; align-items: center;
+            backdrop-filter: blur(8px);
+            z-index: 100;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        #loadingScreenFinal {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: #ffe5ec; z-index: 999;
+            display: none; flex-direction: column;
+            align-items: center; justify-content: center;
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.9); opacity: 0.7; }
+            100% { transform: scale(1.2); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="sparkle-overlay"></div>
+
+    <!-- Tampilan Utama Game 5 -->
+    <div class="question-box animate-pop">
+        <div style="font-size: 3.5rem; margin-bottom: 10px;">eyyyy~ 🫣</div>
+        <h1 class="title-script" style="font-size: 28px; color: #ff477e; margin-bottom: 10px;">Pertanyaan Terakhir!</h1>
+        <p style="font-family: 'Fredoka', sans-serif; font-weight: 600; color: #590d22; line-height: 1.5; margin-bottom: 5px;">
+            Jawab yang jujur ya Pija sayang...
+        </p>
+        <p style="font-family: 'Fredoka', sans-serif; font-weight: 700; color: #ff477e; font-size: 1.3rem; margin-top: 15px;">
+            Kamu sayang gak sama Patir? 🥺❤️
+        </p>
+
+        <!-- Area Tombol Pilihan -->
+        <div class="btn-wrapper" id="btnWrapper">
+            <button class="btn-yes" onclick="pijisayang()">SAYANG BANGET!</button>
+            <button class="btn-no" id="btnNo" onmouseover="kabur()" onclick="kabur()" ontouchstart="kabur()">Gak 😜</button>
+        </div>
+    </div>
+
+    <!-- Pop Up Kemenangan Hakiki (Pija Terpaksa Pilih Sayang) -->
+    <div class="modal-overlay" id="winModal">
+        <div class="container animate-slow" style="max-width: 380px; width: 100%; text-align: center; box-sizing: border-box;">
+            <h2 class="title-script" style="font-size: 2rem; color: #ff477e; margin-bottom: 10px;">Tuhh Kan Beneran! 🥰</h2>
+            <p style="font-family:'Fredoka',sans-serif; font-weight:600; color:#590d22; line-height: 1.5; margin-bottom: 20px;">
+                Makasih ya udah bertahan sejauh ini dan nyelesaiin semua gamenya. Aku punya sesuatu buat kamu...
+            </p>
+            <button class="btn-primary-pink" onclick="bukaSuratAkhir()" style="width: 100%; padding: 15px; font-family:'Fredoka', sans-serif; font-size: 1rem;">
+                Buka Surat Cinta Utama ❤️
+            </button>
+        </div>
+    </div>
+
+    <!-- Layar Transisi Loading Akhir ke Surat -->
+    <div id="loadingScreenFinal">
+        <div style="font-size:4rem; animation: pulse 0.8s infinite alternate;">💌</div>
+        <div style="margin-top:20px; font-weight:700; color:#ff477e; font-size:1.3rem;">Membuka surat cinta utamamu...</div>
+    </div>
+
+    <script>
+        // Set awal posisi tombol 'Gak' biar sejajar rapi sebelum diacak
+        const btnNo = document.getElementById('btnNo');
+        btnNo.style.left = "180px";
+
+        function kabur() {
+            // Mengacak posisi tombol di area layar agar tidak bisa ditekan
+            const x = Math.random() * (window.innerWidth - btnNo.offsetWidth - 40) + 20;
+            const y = Math.random() * (window.innerHeight - btnNo.offsetHeight - 40) + 20;
+            
+            btnNo.style.position = 'fixed';
+            btnNo.style.left = x + 'px';
+            btnNo.style.top = y + 'px';
+        }
+
+        function pijisayang() {
+            // Ketika Pija menekan tombol Sayang
+            document.getElementById('winModal').style.display = 'flex';
+        }
+
+        function bukaSuratAkhir() {
+            document.getElementById('winModal').style.display = 'none';
+            document.getElementById('loadingScreenFinal').style.display = 'flex';
+            
+            setTimeout(() => { 
+                window.location.href = 'surat.html'; 
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

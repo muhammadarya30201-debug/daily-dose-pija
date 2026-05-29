@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Memory Lane ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* FIX TOTAL: Memaksa body dan html bisa di-scroll secara alami */
+        html, body {
+            height: auto !important;
+            min-height: 100vh;
+            overflow-y: auto !important;
+            overflow-x: hidden;
+            display: block !important; 
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        /* FIX TOTAL: Memaksa container surat mengabaikan tinggi kaku dari style.css */
+        .container-surat {
+            height: auto !important; 
+            max-height: none !important;
+            overflow: visible !important;
+            box-sizing: border-box;
+        }
+
+        /* CSS Layout Grid Galeri */
+        .moments-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .grid-item {
+            background: white;
+            border-radius: 18px;
+            padding: 10px;
+            border: 2px dashed #ff477e; /* Mengubah SEMUA border jadi putus-putus pink */
+            box-shadow: 0 5px 15px rgba(255, 71, 126, 0.03);
+            display: flex;
+            flex-direction: column;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .grid-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 1px solid #ffb3c6;
+        }
+        .grid-caption {
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 600;
+            color: #ff477e; /* Mengubah SEMUA warna teks jadi pink manis */
+            font-size: 0.85rem;
+            line-height: 1.4;
+            margin-top: 8px;
+            background: #fff5f7;
+            padding: 8px;
+            border-radius: 8px;
+            flex-grow: 1;
+        }
+        @media (max-width: 380px) {
+            .moments-grid {
+                grid-template-columns: 1fr;
+            }
+            .grid-img {
+                height: 240px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sparkle-overlay"></div>
+
+    <div class="container-surat animate-pop" style="max-width: 600px; margin: 20px auto; padding: 20px;">
+        
+        <h1 class="title-script" style="font-size: 28px; text-align: center;">Memory Lane ✨🧭</h1>
+        <p style="font-family: 'Fredoka', sans-serif; font-weight: 600; color: #ff477e; text-align: center; margin-bottom: 5px;">
+            Satu halaman penuh isi rangkuman senyum manis kamu.
+        </p>
+
+        <div class="moments-grid">
+            
+            <div class="grid-item">
+                <img src="assets/imagepija (10).jpeg" class="grid-img">
+                <div class="grid-caption">Inget gak pas momen ini diambil? Salah satu hari terfavorit aku karena bisa ngeliat senyum kamu selebar ini tanpa drama ngambek. 🥰</div>
+            </div>
+
+            <div class="grid-item">
+                <img src="assets/imagepija (11).jpeg" class="grid-img">
+                <div class="grid-caption">Biarpun kamunya kadang suka sok cuek dan sok galak, di mata aku kamu tetep bocah kecil yang paling ngegemesin di dunia. 🧸</div>
+            </div>
+
+            <div class="grid-item">
+                <img src="assets/imagepija (12).jpeg" class="grid-img">
+                <div class="grid-caption">Makasih ya udah selalu nemenin hari-hari aku sampai saat ini lewat tawa, cerita, bahkan argumen kecil kita yang ajaib.</div>
+            </div>
+
+            <div class="grid-item">
+                <img src="assets/imagepija (13).jpeg" class="grid-img">
+                <div class="grid-caption">Tontonan atau cerita receh dari kamu selalu sukses bikin hari-hari gua yang capek jadi seru dan berwarna lagi.</div>
+            </div>
+
+            <div class="grid-item">
+                <img src="assets/imagepija (14).jpeg" class="grid-img">
+                <div class="grid-caption">Setiap momen kecil bareng kamu itu berharga banget buat aku. Meskipun kadang kamu nyebelin tingkat dewa kalau kumat.</div>
+            </div>
+
+            <div class="grid-item">
+                <img src="assets/imagepija (15).jpeg" class="grid-img">
+                <div class="grid-caption">Tolong simpen halaman ini yaa. Biar kalau kamu lagi ngerasa kesel, kamu inget ada orang yang sayangnya gak pernah berkurang.</div>
+            </div>
+
+            <div class="grid-item">
+                <img src="assets/imagepija (16).jpeg" class="grid-img">
+                <div class="grid-caption">I love you, Pija-nya Patir. Hari ini, esok, dan seterusnya kita bikin memori yang jauh lebih seru lagi ya! 🦋✨</div>
+            </div>
+
+            <div class="grid-item">
+                <img src="assets/imagepija (17).jpeg" class="grid-img">
+                <div class="grid-caption" style="background: #ffe5ec; font-weight: 700; text-align: center;">
+                    "Tetep jadi sapi civvv kesayangan aku ya! Mmuah! 🐮💖"
+                </div>
+            </div>
+
+        </div>
+
+        <div style="font-family: 'Fredoka', sans-serif; font-weight: 700; color: #590d22; text-align: center; margin: 25px 0 15px 0; font-size: 1.1rem;">
+            — Selesai Digarap Sama Patir Dengan Penuh Cinta ✨ —
+        </div>
+
+        <button class="btn-primary-pink" onclick="kembaliKeAwal()" style="width: 100%; padding: 15px; font-family: 'Fredoka', sans-serif; font-weight: 700; border-radius: 15px; font-size: 1rem;">
+            Kembali ke Halaman Utama 🤗🎉
+        </button>
+
+    </div>
+
+    <script>
+        function kembaliKeAwal() {
+            window.top.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

@@ -24,8 +24,9 @@
             border: 3px dashed #ff85a1;
             box-shadow: 0 10px 25px rgba(255, 71, 126, 0.15);
             max-width: 450px;
+            width: 100%;
             text-align: center;
-            animation: fadeIn 0.6s ease-in-out;
+            box-sizing: border-box;
         }
         .pesan-text {
             font-family: 'Fredoka', sans-serif;
@@ -35,6 +36,7 @@
             line-height: 1.6;
             text-align: left; /* Rata kiri supaya enak dibaca kaya surat */
             margin-bottom: 15px;
+            min-height: 20px; /* Jaga space pas kosong */
         }
         .highlight-text {
             background: #ffe5ec;
@@ -47,6 +49,16 @@
             text-align: center;
             margin: 25px 0 20px 0;
             border: 1px solid #ffb3c6;
+            display: none; /* Disembunyikan dulu biar kotaknya ga muncul kosongan */
+        }
+        
+        /* Animasi fade in lembut untuk tombol di akhir */
+        @keyframes tombolMuncul {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .btn-muncul {
+            animation: tombolMuncul 0.8s ease forwards;
         }
     </style>
 </head>
@@ -56,29 +68,91 @@
     <div class="jeda-card">
         <h2 class="title-script" style="font-size: 28px; color: #ff477e; margin-bottom: 20px;">Story singkat ayap for pija ✨</h2>
         
-        <p class="pesan-text">
-            Ga nyangka yaa yang tadinya iseng ketemu di roblox bisa berlanjut sampe detik ini. Yang awalnya cuman basa basi layaknya orang-orang di roblox pada umumnya, ehh ternyata ketemu sama makhluk yang jaraknya sedeket itu.
-        </p>
+        <p class="pesan-text">Ga nyangka yaa yang tadinya iseng ketemu di roblox bisa berlanjut sampe detik ini. Yang awalnya cuman basa basi layaknya orang-orang di roblox pada umumnya, ehh ternyata ketemu sama makhluk yang jaraknya sedeket itu.</p>
         
-        <p class="pesan-text">
-            Aku gatau itu kebetulan apa emang takdir, tapi aku berharap itu yang terbaik aja buat kita. Walaupun kadang ada masalah ataupun ribut-ribut drama apalah tai kucing, tapi kita masih tetep bareng sampe sekarang. Aku mau bilang makasih ke kamu karena masih ada disini.
-        </p>
+        <p class="pesan-text">Aku gatau itu kebetulan apa emang takdir, tapi aku berharap itu yang terbaik aja buat kita. Walaupun kadang ada masalah ataupun ribut-ribut drama apalah tai kucing, tapi kita masih tetep bareng sampe sekarang. Aku mau bilang makasih ke kamu karena masih ada disini.</p>
 
-        <p class="pesan-text">
-            Aku masih inget banget awal kita ketemu di roblox itu tgl 18 Februari H-1 puasa, terus kita lanjut move IG dan akhirnya first meet 18 Maret H-3 lebaran (anjaii pas bgt 1 bulan). Aku masih inget banget rasanya pas kita first meet jalan-jalan bareng, kamu pilihin baju buat aku dan akhirnya kita ngobrol di J.CO (jujur sebenernya disitu aku canggung banget hehee).
-        </p>
+        <p class="pesan-text">Aku masih inget banget awal kita ketemu di roblox itu tgl 18 Februari H-1 puasa, terus kita lanjut move IG dan akhirnya first meet 18 Maret H-3 lebaran (anjaii pas bgt 1慢 1 bulan). Aku masih inget banget rasanya pas kita first meet jalan-jalan bareng, kamu pilihin baju buat aku dan akhirnya kita ngobrol di J.CO (jujur sebenernya disitu aku canggung banget hehee).</p>
 
-        <p class="pesan-text">
-            Oiyaa btw first impression kamu pas awal ketemu aku gimana? Jujur aku udah lama nutup hati dan ganyangka ketemu kamu yang akhirnya hati aku kebuka lagi gara-gara kamu. Aku gatau kamu punya ilmu apa sampe aku bisa buka hati segampang itu.
-        </p>
+        <p class="pesan-text">Oiyaa btw first impression kamu pas awal ketemu aku gimana? Jujur aku udah lama nutup hati dan ganyangka ketemu kamu yang akhirnya hati aku kebuka lagi gara-gara kamu. Aku gatau kamu punya ilmu apa sampe aku bisa buka hati segampang itu.</p>
 
-        <div class="highlight-text">
+        <div class="highlight-text" id="kotakHighlight">
             Dan sekarang kita udah jalan 3 bulan, 101 hari, 2424 jam hehee. Btw makasii yaaa udah mau nemenin aku sampe sekarang. ❤️
         </div>
 
-        <button class="btn-primary-pink" onclick="window.location.href='game5.html'" style="width: 100%; padding: 15px; font-family: 'Fredoka', sans-serif; font-weight: 700; border-radius: 15px; font-size: 1.1rem; cursor: pointer;">
+        <button id="btnLanjut" class="btn-primary-pink" onclick="window.location.href='game5.html'" style="width: 100%; padding: 15px; font-family: 'Fredoka', sans-serif; font-weight: 700; border-radius: 15px; font-size: 1.1rem; cursor: pointer; display: none;">
             Lanjut ke Game Terakhir! 🚀
         </button>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Ambil semua elemen teks cerita dan kotak highlight
+            const paragrafSelesai = document.querySelectorAll('.pesan-text');
+            const kotakHighlight = document.getElementById('kotakHighlight');
+            const tombolLanjut = document.getElementById('btnLanjut');
+            
+            // Simpan semua teks asli ke dalam array data sebelum dikosongkan
+            const kumpulanTeks = [];
+            
+            paragrafSelesai.forEach(p => {
+                kumpulanTeks.push({ elemen: p, isiTeks: p.innerText, tipe: 'paragraf' });
+                p.innerText = ''; // Kosongkan teks awal layar
+            });
+            
+            // Tambahkan kotak highlight ke antrean paling akhir cerita
+            kumpulanTeks.push({ elemen: kotakHighlight, isiTeks: kotakHighlight.innerText, tipe: 'highlight' });
+            kotakHighlight.innerText = '';
+
+            let indeksAntrean = 0;
+
+            function mulaiEfekKetik() {
+                // Jika semua teks sudah selesai diketik
+                if (indeksAntrean >= kumpulanTeks.length) {
+                    // Munculkan tombol navigasi secara anggun
+                    tombolLanjut.style.display = 'block';
+                    tombolLanjut.classList.add('btn-muncul');
+                    return;
+                }
+
+                const dataSekarang = kumpulanTeks[indeksAntrean];
+                const elemenTarget = dataSekarang.elemen;
+                
+                // Jika gilirannya kotak highlight pink, ubah display dari none ke block dulu
+                if (dataSekarang.tipe === 'highlight') {
+                    elemenTarget.style.display = 'block';
+                }
+
+                // Gunakan Array.from agar karakter emoji (surrogate pairs) dibaca utuh satu kesatuan, tidak pecah!
+                const susunanKarakter = Array.from(dataSekarang.isiTeks);
+                let indeksKarakter = 0;
+
+                function ketikPerHuruf() {
+                    if (indeksKarakter < susunanKarakter.length) {
+                        elemenTarget.innerHTML += susunanKarakter[indeksKarakter];
+                        indeksKarakter++;
+                        
+                        // Efek auto-scroll ke bawah otomatis pas teksnya memanjang di HP
+                        window.scrollTo({
+                            top: document.body.scrollHeight,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Kecepatan ngetik (35ms per huruf). Bisa lo ganti kalau mau lebih cepat/lambat
+                        setTimeout(ketikPerHuruf, 35); 
+                    } else {
+                        // Jika satu paragraf selesai, beri jeda 600ms (slow motion jeda) sebelum lanjut paragraf berikutnya
+                        indeksAntrean++;
+                        setTimeout(mulaiEfekKetik, 600);
+                    }
+                }
+
+                ketikPerHuruf();
+            }
+
+            // Mulai jalankan efek mengetik pertama kali 800ms setelah halaman terbuka sempurna
+            setTimeout(mulaiEfekKetik, 800);
+        });
+    </script>
 </body>
 </html>

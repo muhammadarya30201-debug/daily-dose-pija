@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Game 4: Tebak Angka Keberuntungan 🎲</title>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Pacifico&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -16,6 +16,7 @@
             margin: 0;
             padding: 20px;
             box-sizing: border-box;
+            background-color: #fff0f5;
         }
 
         /* Kotak area game tebak angka */
@@ -89,26 +90,33 @@
     <div class="container animate-pop" style="max-width: 400px; width: 100%; text-align: center; box-sizing: border-box;">
         <h1 class="title-script" style="font-size: 28px; color: #ff477e; margin-bottom: 10px;">Game Terakhir! 🎲</h1>
         <p style="font-family: 'Fredoka', sans-serif; font-weight: 600; color: #590d22; line-height: 1.4; margin-bottom: 10px;">
-            Tebak angka rahasia antara 1 sampai 20 pilihan Patir!
+            Tebak angka rahasia antara 1 sampai 20 pilihan Ayap! 👑
         </p>
 
         <div class="game-box">
             <input type="number" id="tebakan" class="input-angka" placeholder="Masukkan angka..." min="1" max="20">
             <div id="clue" class="clue-text">Coba masukkan angka dulu ya! 😉</div>
             
-            <button class="btn-primary-pink" onclick="cekTebakan()" style="width: 100%; margin-top: 20px; padding: 14px; font-family:'Fredoka', sans-serif; font-weight:700; font-size: 1rem;">
+            <button class="btn-primary-pink" onclick="cekTebakan()" style="width: 100%; margin-top: 20px; padding: 14px; font-family:'Fredoka', sans-serif; font-weight:700; font-size: 1rem; cursor: pointer;">
                 Tebak Angka! 🚀
             </button>
         </div>
     </div>
 
+    <!-- POP UP MENANG + PENJELASAN ANGKA 13 -->
     <div class="modal-overlay" id="winModal">
         <div class="container animate-slow" style="max-width: 380px; width: 100%; text-align: center; box-sizing: border-box;">
             <h2 class="title-script" style="font-size: 2rem; color: #ff477e; margin-bottom: 10px;">Horeee Menang! 🥳🎉</h2>
+            
+            <!-- Teks kecil alasan milih angka 13 -->
+            <div style="font-family:'Fredoka',sans-serif; font-weight:600; color:#ff477e; font-size: 0.9rem; background: #fff5f7; padding: 12px; border-radius: 15px; border: 2px dashed #ffb3c6; margin-bottom: 15px; line-height: 1.4;">
+                Kenapa angka 13? Soalnya itu kan hari lahirnya bocil kesayangan aku yang paling spesial di dunia (13 Desember 2003)! 🎂ciee lahir wkwk. ❤️
+            </div>
+
             <p style="font-family:'Fredoka',sans-serif; font-weight:600; color:#590d22; line-height: 1.5; margin-bottom: 20px;">
                 Kamu berhasil nyelesaiin semua tantangan! Sekarang saatnya buka hadiah utama kamu.
             </p>
-            <button class="btn-primary-pink" onclick="transisiKeSurat()" style="width: 100%; padding: 15px; font-family:'Fredoka', sans-serif; font-size: 1rem;">
+            <button class="btn-primary-pink" onclick="transisiKeSurat()" style="width: 100%; padding: 15px; font-family:'Fredoka', sans-serif; font-size: 1rem; cursor: pointer;">
                 Buka Surat Spesial ❤️
             </button>
         </div>
@@ -144,15 +152,15 @@
             input.focus();
         }
 
-       function transisiKeSurat() {
-    document.getElementById('winModal').style.display = 'none';
-    document.getElementById('loadingScreenFinal').style.display = 'flex';
+        function transisiKeSurat() {
+            document.getElementById('winModal').style.display = 'none';
+            document.getElementById('loadingScreenFinal').style.display = 'flex';
 
-    // Mengarah ke file curhatan / notes-jeda.html terlebih dahulu
-    setTimeout(() => { 
-        window.location.href = 'notes-jeda.html'; 
-    }, 3000);
-}
+            // Mengarah ke file curhatan / notes-jeda.html terlebih dahulu
+            setTimeout(() => { 
+                window.location.href = 'notes-jeda.html'; 
+            }, 3000);
+        }
     </script>
 </body>
 </html>

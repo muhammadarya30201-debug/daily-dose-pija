@@ -67,6 +67,45 @@
             padding: 20px;
             box-sizing: border-box;
         }
+
+        /* ANIMASI BARU: Efek Sinematik Slow Motion Reveal */
+        @keyframes slowMoReveal {
+            0% {
+                opacity: 0;
+                filter: blur(12px);
+                transform: scale(0.93) translateY(-10px);
+            }
+            30% {
+                opacity: 0.3;
+                filter: blur(6px);
+            }
+            100% {
+                opacity: 1;
+                filter: blur(0px);
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        /* Kelas khusus untuk kotak alasan dengan efek slow-mo */
+        .box-alasan-slowmo {
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 600;
+            color: #ff477e;
+            font-size: 0.9rem;
+            background: #fff5f7;
+            padding: 12px;
+            border-radius: 15px;
+            border: 2px dashed #ffb3c6;
+            margin-bottom: 15px;
+            line-height: 1.4;
+            
+            /* Setingan awal sembunyi sebelum animasi jalan */
+            opacity: 0; 
+            
+            /* Durasi sengaja dibikin lama (2.5 detik) biar kerasa slow-mo nya */
+            animation: slowMoReveal 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            animation-delay: 0.6s; /* Diberi jeda dikit setelah pop-up kebuka biar dramatis */
+        }
         
         /* Layar loading full screen */
         #loadingScreenFinal {
@@ -103,13 +142,11 @@
         </div>
     </div>
 
-    <!-- POP UP MENANG + PENJELASAN ANGKA 13 -->
     <div class="modal-overlay" id="winModal">
         <div class="container animate-slow" style="max-width: 380px; width: 100%; text-align: center; box-sizing: border-box;">
             <h2 class="title-script" style="font-size: 2rem; color: #ff477e; margin-bottom: 10px;">Horeee Menang! 🥳🎉</h2>
             
-            <!-- Teks kecil alasan milih angka 13 -->
-            <div style="font-family:'Fredoka',sans-serif; font-weight:600; color:#ff477e; font-size: 0.9rem; background: #fff5f7; padding: 12px; border-radius: 15px; border: 2px dashed #ffb3c6; margin-bottom: 15px; line-height: 1.4;">
+            <div class="box-alasan-slowmo">
                 Kenapa angka 13? Soalnya itu kan hari lahirnya bocil kesayangan aku yang paling spesial di dunia (13 Desember 2003)! 🎂ciee lahir wkwk. ❤️
             </div>
 

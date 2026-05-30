@@ -68,25 +68,7 @@
             box-sizing: border-box;
         }
 
-        /* ANIMASI BARU: Efek Sinematik Slow Motion Reveal */
-        @keyframes slowMoReveal {
-            0% {
-                opacity: 0;
-                filter: blur(12px);
-                transform: scale(0.93) translateY(-10px);
-            }
-            30% {
-                opacity: 0.3;
-                filter: blur(6px);
-            }
-            100% {
-                opacity: 1;
-                filter: blur(0px);
-                transform: scale(1) translateY(0);
-            }
-        }
-
-        /* Kelas khusus untuk kotak alasan dengan efek slow-mo */
+        /* FIX VISUAL: Menggunakan CSS Transition murni agar efek slow-mo mulus */
         .box-alasan-slowmo {
             font-family: 'Fredoka', sans-serif;
             font-weight: 600;
@@ -99,12 +81,22 @@
             margin-bottom: 15px;
             line-height: 1.4;
             
-            /* Setingan awal sembunyi sebelum animasi jalan */
-            opacity: 0; 
+            /* KONDISI AWAL: Buram parah, transparan, dan agak mengecil */
+            opacity: 0;
+            filter: blur(20px);
+            transform: scale(0.9);
             
-            /* Durasi sengaja dibikin lama (2.5 detik) biar kerasa slow-mo nya */
-            animation: slowMoReveal 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-            animation-delay: 0.6s; /* Diberi jeda dikit setelah pop-up kebuka biar dramatis */
+            /* Set durasi transisi jadi 2.5 detik (Slow Motion) */
+            transition: opacity 2.5s cubic-bezier(0.25, 1, 0.5, 1), 
+                        filter 2.5s cubic-bezier(0.25, 1, 0.5, 1), 
+                        transform 2.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        
+        /* Kelas tambahan yang akan ditembak oleh JavaScript */
+        .box-alasan-slowmo.jalan-slowmo {
+            opacity: 1;
+            filter: blur(0px);
+            transform: scale(1);
         }
         
         /* Layar loading full screen */
@@ -146,7 +138,7 @@
         <div class="container animate-slow" style="max-width: 380px; width: 100%; text-align: center; box-sizing: border-box;">
             <h2 class="title-script" style="font-size: 2rem; color: #ff477e; margin-bottom: 10px;">Horeee Menang! 🥳🎉</h2>
             
-            <div class="box-alasan-slowmo">
+            <div class="box-alasan-slowmo" id="kotakAlasan">
                 Kenapa angka 13? Soalnya itu kan hari lahirnya bocil kesayangan aku yang paling spesial di dunia (13 Desember 2003)! 🎂ciee lahir wkwk. ❤️
             </div>
 
@@ -179,7 +171,15 @@
 
             if (userGuess === angkaRahasia) {
                 clue.innerText = "Bener banget! Kamu emang jodoh aku wkwk. ❤️";
+                
+                // 1. Munculkan modal utama terlebih dahulu
                 document.getElementById('winModal').style.display = 'flex';
+                
+                // 2. TIMING FIX: Kasih jeda 400ms agar modal selesai terbuka, baru mulai efek slow-mo blurnya
+                setTimeout(() => {
+                    document.getElementById('kotakAlasan').classList.add('jalan-slowmo');
+                }, 400);
+
             } else if (userGuess < angkaRahasia) {
                 clue.innerText = "Kekecilan! Coba angka yang lebih besar... ⬆️";
             } else {
